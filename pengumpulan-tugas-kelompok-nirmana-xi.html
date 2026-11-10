@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengumpulan Tugas Kelompok Nirmana Kelas XI</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C2410C'/%3E%3Cpath d='M20 14h16l10 10v26a2 2 0 0 1-2 2H20a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z' fill='%23FFFFFF'/%3E%3Cpath d='M36 14v10h10z' fill='%23FDE8D7'/%3E%3Crect x='24' y='32' width='16' height='3' rx='1.5' fill='%23C2410C'/%3E%3Crect x='24' y='39' width='12' height='3' rx='1.5' fill='%23C2410C'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f6f3ee; --card: #ffffff; --ink: #222; --muted: #6b6b6b;
+    --accent: #c2410c; --accent-soft: #fde8d7; --line: #e5e0d8; --ok: #15803d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { border-left: 6px solid var(--accent); padding: 8px 16px; margin-bottom: 20px; }
+  header h1 { margin: 0; font-size: 1.6rem; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px; margin-bottom: 18px;
+  }
+  .card h2 { margin: 0 0 10px; font-size: 1.1rem; }
+  .step-badge {
+    display: inline-block; background: var(--accent); color: #fff; border-radius: 999px;
+    width: 26px; height: 26px; line-height: 26px; text-align: center; font-size: 0.85rem;
+    margin-right: 8px; vertical-align: middle;
+  }
+  ol.steps { margin: 0; padding-left: 20px; }
+  ol.steps li { margin-bottom: 8px; }
+  code { background: var(--accent-soft); padding: 2px 6px; border-radius: 6px; font-size: 0.9em; word-break: break-all; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    padding: 10px 16px; border-radius: 10px; border: 0; font-size: 0.95rem; cursor: pointer;
+  }
+  .btn.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row > div { flex: 1 1 200px; }
+  label { display: block; font-weight: 600; margin: 12px 0 4px; font-size: 0.92rem; }
+  input, textarea, select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+    font: inherit; background: #fff; color: inherit;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  .hint { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .err { color: #b91c1c; font-size: 0.82rem; margin-top: 4px; min-height: 0; }
+  input.invalid, select.invalid, textarea.invalid { border-color: #b91c1c; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  pre {
+    background: #faf8f5; border: 1px dashed var(--line); border-radius: 10px;
+    padding: 12px; white-space: pre-wrap; word-break: break-word; font-size: 0.88rem; margin: 12px 0 0;
+  }
+  .status { margin-top: 10px; font-size: 0.9rem; color: var(--ok); min-height: 1.2em; }
+  .notice {
+    background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px;
+    padding: 12px 14px; font-size: 0.9rem; margin-top: 12px;
+  }
+  .filebox {
+    background: var(--accent-soft); border-radius: 10px; padding: 10px 12px;
+    font-size: 0.92rem; margin: 10px 0 0;
+  }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Pengumpulan Tugas Kelompok Nirmana</h1>
+    <p>Kelas XI MIGO, MISO, dan SOSHUM</p>
+  </header>
+
+  <!-- LANGKAH 1: FORMULIR -->
+  <section class="card" id="step1">
+    <h2><span class="step-badge">1</span>Isi data kelompok</h2>
+    <form id="form" novalidate>
+      <div class="row">
+        <div>
+          <label for="kelompok">Nama kelompok</label>
+          <input id="kelompok" type="text" placeholder="Contoh: Kelompok 3 Biru" autocomplete="off">
+          <div class="err" id="err-kelompok"></div>
+        </div>
+        <div>
+          <label for="kelas">Kelas</label>
+          <select id="kelas">
+            <option value="">Pilih kelas</option>
+            <optgroup label="XI MIGO">
+              <option>XI MIGO 1</option><option>XI MIGO 2</option><option>XI MIGO 3</option>
+            </optgroup>
+            <optgroup label="XI MISO">
+              <option>XI MISO 1</option><option>XI MISO 2</option><option>XI MISO 3</option><option>XI MISO 4</option>
+            </optgroup>
+            <optgroup label="XI SOSHUM">
+              <option>XI SOSHUM 1</option><option>XI SOSHUM 2</option><option>XI SOSHUM 3</option>
+            </optgroup>
+          </select>
+          <div class="err" id="err-kelas"></div>
+        </div>
+      </div>
+
+      <label for="judul">Judul tugas</label>
+      <input id="judul" type="text" placeholder="Contoh: Komposisi Warna Analog">
+      <div class="err" id="err-judul"></div>
+
+      <label for="anggota">Anggota kelompok</label>
+      <textarea id="anggota" placeholder="Tulis satu nama per baris&#10;Contoh:&#10;Dina Rahmawati&#10;Rizky Pratama"></textarea>
+      <div class="hint">Maksimal 8 nama. Tulis satu nama per baris.</div>
+      <div class="err" id="err-anggota"></div>
+
+      <label for="catatan">Catatan (opsional)</label>
+      <input id="catatan" type="text" placeholder="Contoh: file dalam ukuran A3">
+
+      <div class="actions">
+        <button type="submit" class="btn">Buat PDF &amp; Unduh</button>
+        <button type="button" class="btn secondary" id="reset">Kosongkan</button>
+      </div>
+      <div class="status" id="draft-status"></div>
+    </form>
+  </section>
+
+  <!-- LANGKAH 2: UPLOAD KE DRIVE -->
+  <section class="card hidden" id="step2">
+    <h2><span class="step-badge">2</span>Unggah PDF ke Google Drive</h2>
+    <div class="filebox">
+      PDF sudah diunduh dengan nama: <code id="filename"></code>
+    </div>
+    <p style="margin:12px 0 8px"><strong>Kumpulkan 2 file:</strong> (1) PDF formulir data kelompok yang baru diunduh dan (2) file tugas Nirmana kelompokmu.</p>
+    <ol class="steps">
+      <li>Buka folder pengumpulan dengan tombol di bawah.</li>
+      <li>Unggah kedua file ke folder tersebut. Untuk PDF, jangan ubah namanya.</li>
+    </ol>
+    <div class="actions">
+      <a class="btn" href="https://drive.google.com/drive/folders/1Dwz-9za4mzIPugiDtQ8mBJqRjPx8yvVj?usp=sharing" target="_blank" rel="noopener">Buka Folder Drive</a>
+      <button type="button" class="btn secondary" id="redownload">Unduh PDF Lagi</button>
+    </div>
+
+  </section>
+
+  <!-- RINGKASAN -->
+  <section class="card hidden" id="result">
+    <h2>Ringkasan pengumpulan</h2>
+    <p class="hint" style="margin-top:0">Salin teks ini dan kirimkan sesuai arahan guru.</p>
+    <pre id="summary"></pre>
+    <div class="actions">
+      <button type="button" class="btn" id="copy">Salin Ringkasan</button>
+    </div>
+    <div class="status" id="copy-status"></div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var DRAFT_KEY = 'nirmana-xi-kelompok-draft';
+  var fields = ['kelompok', 'kelas', 'judul', 'anggota', 'catatan'];
+  var lastPdf = null;   // { blob, name, data }
+
+  function $(id) { return document.getElementById(id); }
+
+  // ---------- Draf (hanya di browser ini, aman bila diblokir) ----------
+  function saveDraft() {
+    try {
+      var d = {};
+      fields.forEach(function (f) { d[f] = $(f).value; });
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+      $('draft-status').textContent = 'Draf tersimpan di browser ini.';
+    } catch (e) { $('draft-status').textContent = ''; }
+  }
+  function loadDraft() {
+    try {
+      var raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      fields.forEach(function (f) { if (d[f] != null) $(f).value = d[f]; });
+      $('draft-status').textContent = 'Draf sebelumnya dimuat.';
+    } catch (e) {}
+  }
+  function clearDraft() {
+    try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  }
+  fields.forEach(function (f) {
+    $(f).addEventListener('input', saveDraft);
+    $(f).addEventListener('change', saveDraft);
+  });
+
+  // ---------- Validasi ----------
+  function setErr(id, msg) {
+    $('err-' + id).textContent = msg || '';
+    var el = $(id);
+    if (el) el.classList.toggle('invalid', !!msg);
+  }
+  function getMembers() {
+    return $('anggota').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function validateForm() {
+    var kelompok = $('kelompok').value.trim();
+    var kelas = $('kelas').value;
+    var judul = $('judul').value.trim();
+    var members = getMembers();
+
+    setErr('kelompok', kelompok.length < 2 ? 'Isi nama kelompok.' : '');
+    setErr('kelas', kelas ? '' : 'Pilih kelas.');
+    setErr('judul', judul ? '' : 'Isi judul tugas.');
+    setErr('anggota', members.length === 0 ? 'Isi minimal satu nama anggota.' :
+              (members.length > 8 ? 'Maksimal 8 anggota.' : ''));
+
+    return ['kelompok', 'kelas', 'judul', 'anggota'].every(function (f) {
+      return !$('err-' + f).textContent;
+    });
+  }
+  function isDriveLink(v) {
+    return /^https:\/\/(drive|docs)\.google\.com\//.test(v);
+  }
+
+  // ---------- Pembuatan PDF sederhana (tanpa pustaka luar) ----------
+  function clean(s) { return String(s).replace(/[^\x20-\x7E]/g, '?'); }
+  function pdfEsc(s) { return s.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)'); }
+  function wrapLine(text, max) {
+    var out = [], t = clean(text);
+    while (t.length > max) {
+      var cut = t.lastIndexOf(' ', max);
+      if (cut < 1) cut = max;
+      out.push(t.slice(0, cut));
+      t = '   ' + t.slice(cut).trim();
+    }
+    out.push(t);
+    return out;
+  }
+  // Helper gambar PDF: warna, kotak, garis, dan teks dengan posisi bebas
+  function hex(h) {
+    var n = parseInt(h.slice(1), 16);
+    return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]
+      .map(function (v) { return v.toFixed(3); }).join(' ');
+  }
+  function fillRect(x, y, w, h, color) {
+    return hex(color) + ' rg ' + x + ' ' + y + ' ' + w + ' ' + h + ' re f\n';
+  }
+  function hLine(x1, x2, y, color, width) {
+    return hex(color) + ' RG ' + width + ' w ' + x1 + ' ' + y + ' m ' + x2 + ' ' + y + ' l S\n';
+  }
+  function text(x, y, str, font, size, color) {
+    return 'BT /' + font + ' ' + size + ' Tf ' + hex(color) + ' rg ' + x + ' ' + y +
+      ' Td (' + pdfEsc(clean(str)) + ') Tj ET\n';
+  }
+  function textWidth(str, size) { return clean(str).length * size * 0.5; }
+  function wrapText(str, maxW, size) {
+    var words = clean(str).split(' '), out = [], cur = '';
+    words.forEach(function (w) {
+      var test = cur ? cur + ' ' + w : w;
+      if (textWidth(test, size) > maxW && cur) { out.push(cur); cur = w; }
+      else { cur = test; }
+    });
+    if (cur) out.push(cur);
+    return out.length ? out : [''];
+  }
+
+  // Tata letak halaman A4: header berwarna, tabel data, daftar anggota, footer
+  function drawPage(d) {
+    var A = '#C2410C', DARK = '#222222', MUTED = '#6B6B6B', LINE = '#E5E0D8',
+        SOFT = '#FFF4EA', WHITE = '#FFFFFF', PALE = '#FDE8D7';
+    var s = '';
+
+    s += fillRect(0, 752, 595, 90, A);
+    s += text(50, 800, 'PENGUMPULAN TUGAS KELOMPOK', 'F2', 18, WHITE);
+    s += text(50, 778, 'Nirmana  -  Kelas XI', 'F1', 11, PALE);
+
+    var y = 716;
+    s += text(50, y, 'DATA TUGAS', 'F2', 9, A);
+    s += hLine(50, 545, y - 8, LINE, 0.8);
+    y -= 30;
+
+    var rows = [
+      ['Judul tugas', d.judul, 'F2', 12],
+      ['Nama kelompok', d.kelompok, 'F2', 12],
+      ['Kelas', d.kelas, 'F1', 12],
+      ['Jumlah anggota', d.members.length + ' orang', 'F1', 12]
+    ];
+    if (d.catatan) rows.push(['Catatan', d.catatan, 'F1', 11]);
+
+    rows.forEach(function (r) {
+      var lines = wrapText(r[1], 320, r[3]);
+      s += text(50, y, r[0], 'F1', 10, MUTED);
+      lines.forEach(function (ln, i) { s += text(200, y - i * 15, ln, r[2], r[3], DARK); });
+      var bb = y - (lines.length - 1) * 15;
+      var sep = bb - 7;
+      s += hLine(50, 545, sep, LINE, 0.5);
+      y = sep - 16;
+    });
+
+    y -= 14;
+    s += text(50, y, 'ANGGOTA KELOMPOK', 'F2', 9, A);
+    s += hLine(50, 545, y - 8, LINE, 0.8);
+    y -= 26;
+
+    var boxTop = y + 14;
+    var boxH = d.members.length * 24 + 16;
+    s += fillRect(50, boxTop - boxH, 495, boxH, SOFT);
+    var my = boxTop - 22;
+    d.members.forEach(function (m, i) {
+      s += text(68, my, (i + 1) + '.', 'F2', 11, A);
+      s += text(92, my, m, 'F1', 12, DARK);
+      my -= 24;
+    });
+
+    s += hLine(50, 545, 70, LINE, 0.8);
+    s += text(50, 54, 'Dibuat: ' + new Date().toLocaleString('id-ID'), 'F1', 8, MUTED);
+    var badge = 'Dikumpulkan: 2 file (PDF formulir + file tugas Nirmana)';
+    s += text(545 - textWidth(badge, 8), 54, badge, 'F1', 8, MUTED);
+    return s;
+  }
+
+  function buildPdf(stream) {
+    var objs = [
+      '<< /Type /Catalog /Pages 2 0 R >>',
+      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>',
+      '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream'
+    ];
+    var out = '%PDF-1.4\n', offsets = [];
+    objs.forEach(function (o, i) {
+      offsets.push(out.length);
+      out += (i + 1) + ' 0 obj\n' + o + '\nendobj\n';
+    });
+    var xref = out.length;
+    out += 'xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n';
+    offsets.forEach(function (o) { out += String(o).padStart(10, '0') + ' 00000 n \n'; });
+    out += 'trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF';
+    return new Blob([out], { type: 'application/pdf' });
+  }
+  function makeFileName(kelompok, kelas, judul) {
+    var base = (kelompok + '_' + kelas + '_' + judul)
+      .replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return 'NIRMANA_' + base + '.pdf';
+  }
+  function downloadBlob(blob, name) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+
+  function buildSummaryData() {
+    var kelompok = $('kelompok').value.trim();
+    var kelas = $('kelas').value;
+    var judul = $('judul').value.trim();
+    var members = getMembers();
+    var catatan = $('catatan').value.trim();
+    var lines = ['PENGUMPULAN TUGAS KELOMPOK NIRMANA - KELAS XI', ''];
+    lines.push('Judul tugas   : ' + judul);
+    lines.push('Nama kelompok : ' + kelompok);
+    lines.push('Kelas         : ' + kelas);
+    lines.push('Anggota       :');
+    members.forEach(function (m, i) { lines.push('  ' + (i + 1) + '. ' + m); });
+    if (catatan) lines.push('Catatan       : ' + catatan);
+    lines.push('');
+    lines.push('Dibuat        : ' + new Date().toLocaleString('id-ID'));
+    return { kelompok: kelompok, kelas: kelas, judul: judul, members: members, catatan: catatan, lines: lines };
+  }
+
+  function makePdfAndDownload() {
+    var d = buildSummaryData();
+    var name = makeFileName(d.kelompok, d.kelas, d.judul);
+    var blob = buildPdf(drawPage(d));
+    lastPdf = { blob: blob, name: name, data: d };
+    downloadBlob(blob, name);
+    $('filename').textContent = name;
+  }
+
+  // ---------- Alur ----------
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validateForm()) return;
+    makePdfAndDownload();
+    $('step2').classList.remove('hidden');
+    showSummary();
+    $('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  $('redownload').addEventListener('click', function () {
+    if (lastPdf) downloadBlob(lastPdf.blob, lastPdf.name);
+  });
+
+  // Ringkasan dibuat otomatis begitu link Drive yang valid diisi
+  function showSummary() {
+    if (!lastPdf) return;
+
+    var d = lastPdf.data;
+    var text = 'PENGUMPULAN TUGAS KELOMPOK NIRMANA - KELAS XI\n' +
+      'Judul tugas   : ' + d.judul + '\n' +
+      'Nama kelompok : ' + d.kelompok + '\n' +
+      'Kelas         : ' + d.kelas + '\n' +
+      'Anggota       :\n' + d.members.map(function (m, i) { return '  ' + (i + 1) + '. ' + m; }).join('\n') + '\n' +
+      (d.catatan ? 'Catatan       : ' + d.catatan + '\n' : '') +
+      'Jumlah file   : 2 (PDF formulir data kelompok dan file tugas Nirmana)\n' +
+      'Nama file PDF : ' + lastPdf.name + '\n';
+    $('summary').textContent = text;
+    $('result').classList.remove('hidden');
+  }
+
+  $('copy').addEventListener('click', function () {
+    var text = $('summary').textContent;
+    var done = function () { $('copy-status').textContent = 'Ringkasan tersalin.'; };
+    var fail = function () { $('copy-status').textContent = 'Salin otomatis tidak tersedia. Blok teks di atas lalu salin manual.'; };
+    try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+  });
+
+  $('reset').addEventListener('click', function () {
+    fields.forEach(function (f) { $(f).value = ''; });
+    ['kelompok', 'kelas', 'judul', 'anggota'].forEach(function (f) { setErr(f, ''); });
+    $('step2').classList.add('hidden');
+    $('result').classList.add('hidden');
+    $('draft-status').textContent = '';
+    lastPdf = null;
+    clearDraft();
+  });
+
+  loadDraft();
+})();
+</script>
+</body>
+</html>
